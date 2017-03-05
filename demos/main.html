@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+  <title>Doges of the World</title>
+  <link rel="stylesheet" href="https://js.arcgis.com/4.3/esri/themes/dark-blue/main.css">
+  <link rel="stylesheet" href="https://s3-us-west-1.amazonaws.com/patterns.esri.com/files/calcite-web/1.0.0-rc.1/css/calcite-web.min.css">
+  <link rel="stylesheet" href="./css/main.css">
+  <style>
+    html,
+    body,
+    #viewDiv {
+      padding: 0;
+      margin: 0;
+      height: 100%;
+    }
+
+    .esri-ui-bottom-right {
+      flex-flow: column;
+    }
+
+    .esri-ui-bottom-right .esri-component {
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <script>
+    var href = location.href;
+    var demoLocation = href.slice(0, href.lastIndexOf("/")) + "/src";
+    var dojoConfig = {
+      packages: [
+        {
+          name: "demo",
+          location: demoLocation
+        }
+      ]
+    };
+  </script>
+  <script src="https://js.arcgis.com/4.3/"></script>
+  <script>
+    require([
+      "demo/utils",
+      "esri/core/watchUtils",
+      "esri/Map",
+      "esri/views/MapView",
+      "esri/widgets/BasemapToggle",
+      "esri/widgets/Expand",
+      "esri/widgets/LayerList",
+      "esri/widgets/Search",
+      "dojo/domReady!"
+    ], function(
+      demoUtils,
+      watchUtils,
+      Map,
+      MapView,
+      BasemapToggle, Expand, Legend, Search
+    ) {
+
+      var dogeFeatureLayer = demoUtils.getDogeFeatureLayer();
+
+      var map = new Map({
+        basemap: "gray",
+        layers: [
+          dogeFeatureLayer
+        ]
+      });
+
+      var view = new MapView({
+        map: map,
+        container: "viewDiv",
+        zoom: 2
+      });
+
+      var basemapToggle = new BasemapToggle({
+        nextBasemap: "topo",
+        view: view
+      });
+
+      var search = new Search({
+        sources: [
+          {
+            featureLayer: dogeFeatureLayer,
+            placeholder: "find doge",
+            openPopupOnSelect: false,
+            resultSymbol: demoUtils.getDogeSymbol()
+          }
+        ],
+        view: view
+      });
+
+      var searchExpand = new Expand({
+        expandIconClass: "esri-icon-search",
+        content: search
+      });
+
+      var typeExpand = new Expand({
+        expandIconClass: "esri-icon-filter",
+        content: demoUtils.createTypeSelect(dogeFeatureLayer)
+      });
+
+      var timeExpand = new Expand({
+        expandIconClass: "esri-icon-time-clock",
+        content: demoUtils.createTimeSlider(dogeFeatureLayer)
+      });
+
+      var theExpandables = [searchExpand, typeExpand, timeExpand];
+
+      view.ui.add(theExpandables, "top-right");
+      view.ui.add(basemapToggle, "bottom-left");
+
+      watchUtils.init(view, "widthBreakpoint", function(width) {
+        var mobileSized = width === "small" || width === "xsmall";
+
+        if (mobileSized) {
+          view.ui.move(theExpandables, "bottom-right");
+          view.ui.remove(basemapToggle);
+        }
+        else {
+          view.ui.move(theExpandables, "top-right");
+          view.ui.add(basemapToggle, "bottom-left");
+        }
+      });
+
+    });
+  </script>
+  <div id="viewDiv"></div>
+</body>
+</html>

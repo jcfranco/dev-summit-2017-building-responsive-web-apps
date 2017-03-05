@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+  <title>Feature Detection</title>
+  <style>
+    html,
+    body,
+    #viewDiv {
+      padding: 0;
+      margin: 0;
+      height: 100%;
+    }
+  </style>
+</head>
+<body>
+  <script>
+    var href = location.href;
+    var demoLocation = href.slice(0, href.lastIndexOf("/")) + "/src";
+    var dojoConfig = {
+      packages: [
+        {
+          name: "demo",
+          location: demoLocation
+        }
+      ]
+    };
+  </script>
+  <script src="https://js.arcgis.com/4.3/"></script>
+  <script>
+    require([
+      "demo/utils",
+      "esri/Map",
+      "dojo/domReady!"
+    ], function(
+      demoUtils,
+      Map
+    ) {
+
+      demoUtils.get3DCapableView()
+        .then(function(MapViewOrSceneView) {
+          var map = new Map({
+            basemap: "topo"
+          });
+
+          var view = new MapViewOrSceneView({
+            map: map,
+            container: "viewDiv",
+            center: [-116.51327133175782, 33.82029520464912],
+            zoom: 2
+          });
+        }
+      );
+    });
+  </script>
+  <div id="viewDiv"></div>
+</body>
+</html>

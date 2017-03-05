@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+    <title>Expand Demo</title>
+
+    <style>
+        html,
+        body,
+        #viewDiv {
+            padding: 0;
+            margin: 0;
+            height: 100%;
+            width: 100%;
+        }
+        
+        .esri-icon-collapse:before {
+            content: "\e600" !important;
+        }
+        
+        .esri-view-width-greater-than-large .esri-basemap-gallery__item {
+            padding: 0;
+        }
+        
+        .esri-icon-collapse {
+            color: #6e6e6e;
+        }
+    </style>
+
+    <link rel="stylesheet" href="https://js.arcgis.com/4.3/esri/css/main.css">
+
+    <script src="https://js.arcgis.com/4.3/"></script>
+
+    <script>
+        require([
+            "esri/views/MapView",
+            "esri/WebMap",
+            "esri/widgets/Expand",
+            "esri/widgets/BasemapGallery",
+            "dojo/domReady!"
+        ], function (
+            MapView, WebMap, Expand, BasemapGallery
+        ) {
+
+                /************************************************************
+                 * Creates a new WebMap instance. A WebMap must reference
+                 * a PortalItem ID that represents a WebMap saved to
+                 * arcgis.com or an on-premise portal.
+                 *
+                 * To load a WebMap from an on-premise portal, set the portal
+                 * url in esriConfig.portalUrl.
+                 ************************************************************/
+                var webmap = new WebMap({
+                    portalItem: { // autocasts as new PortalItem()
+                        id: "799c56315b68412dbf919b1476536af8"//"c8e94cd9145243e3bb8b080955439a9e"
+                    }
+                });
+
+                /************************************************************
+                 * Set the WebMap instance to the map property in a MapView.
+                 ************************************************************/
+                var view = new MapView({
+                    map: webmap,
+                    container: "viewDiv",
+                    popup: {
+                        dockEnabled: true,
+                        dockOptions: {
+                            // Disables the dock button from the popup
+                            buttonEnabled: false,
+                            // Ignore the default sizes that trigger responsive docking
+                            breakpoint: false
+
+                        }
+                    },
+                });
+
+                // create custom basemap group 
+                var bmg = new BasemapGallery({
+                    view: view
+                });
+
+                var expand = new Expand({
+                    expandIconClass: "esri-icon-maps",
+                    expandToolTip: "Map Gallery",
+                    title: "Map Gallery",
+                    view: view,
+                    content: bmg
+                });
+                view.ui.add(expand, "top-left");
+            });
+        function createUI(items) {
+            console.log("Done", items.results);
+            items.results.forEach(function (r) {
+                console.log(r.title);
+            })
+        }
+    </script>
+</head>
+
+<body>
+    <div id="viewDiv"></div>
+</body>
+
+</html>

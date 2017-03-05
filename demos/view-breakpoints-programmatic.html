@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>View UI</title>
+  <link rel="stylesheet" href="https://js.arcgis.com/4.3/esri/css/main.css">
+  <style>
+    html,
+    body {
+      padding: 0;
+      margin: 0;
+      height: 100%;
+      width: 100%;
+    }
+
+    #viewDiv {
+      height: 80%;
+      width: 80%;
+    }
+
+    .esri-view-width-less-than-medium .example,
+    .esri-view-width-medium .example {
+      width: 50%;
+    }
+
+    .esri-view-width-greater-than-medium .example {
+      width: 70%;
+    }
+
+    .esri-view-height-less-than-small .example {
+      opacity: 0;
+    }
+
+    .example {
+      box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.45);
+    }
+  </style>
+  <script src="https://js.arcgis.com/4.3/"></script>
+  <script>
+    require([
+      "esri/Map",
+      "esri/views/MapView",
+      "esri/widgets/BasemapGallery",
+      "dojo/dom-construct",
+      "dojo/domReady!"
+    ], function(
+      Map, MapView, BasemapGallery,
+      domConstruct
+    ) {
+      var map = new Map({
+        basemap: "topo"
+      });
+
+      var view = new MapView({
+        container: "viewDiv",
+        map: map,
+        center: [139.68, 35.68],
+        zoom: 3
+      });
+
+      var someNode = domConstruct.create("img", {
+        className: "example",
+        src: "../images/corner.gif"
+      });
+
+      view.ui.add(someNode, {
+        position: "top-right"
+      });
+
+      view.watch("orientation", function(newValue, oldValue) {
+        if (newValue === "landscape") {
+          someNode.src = "../images/"
+          return;
+        }
+
+        // portrait
+
+      });
+    });
+  </script>
+
+<body>
+  <div id="viewDiv"></div>
+</body>
+
+</html>

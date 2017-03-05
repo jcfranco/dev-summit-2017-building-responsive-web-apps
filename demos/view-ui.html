@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>View UI</title>
+  <link rel="stylesheet" href="https://js.arcgis.com/4.3/esri/css/main.css">
+  <link rel="stylesheet" href="https://s3-us-west-1.amazonaws.com/patterns.esri.com/files/calcite-web/1.0.0-rc.1/css/calcite-web.min.css">
+  <style>
+    html,
+    body,
+    #viewDiv {
+      padding: 0;
+      margin: 0;
+      height: 100%;
+      width: 100%;
+    }
+
+    .example-node {
+      height: 200px;
+      width: 200px;
+    }
+  </style>
+  <script src="https://js.arcgis.com/4.3/"></script>
+  <script>
+    require([
+      "dojo/dom-construct",
+      "dojo/on",
+
+      "esri/Map",
+      "esri/views/MapView",
+      "dojo/domReady!"
+    ], function(
+      domConstruct, on,
+      Map, MapView
+    ) {
+
+      var map = new Map({
+        basemap: "topo"
+      });
+
+      var view = new MapView({
+        container: "viewDiv",
+        map: map,
+        center: [139.68, 35.68],
+        zoom: 3
+      });
+
+      var node = domConstruct.create("img", {
+        className: "example-node",
+        src: "../images/corner.gif"
+      });
+
+      var mover = domConstruct.create("select", {
+        className: "example-mover"
+      });
+
+      on(mover, "change", function() {
+        var position = mover.options[mover.selectedIndex].value;
+        view.ui.move(node, position);
+      });
+
+      var positions = [
+        "top-right",
+        "top-left",
+        "bottom-right",
+        "bottom-left"
+      ];
+
+      positions.forEach(function(position) {
+        domConstruct.create("option", {
+          value: position,
+          innerHTML: position.replace("-", " ")
+        }, mover);
+      });
+
+      view.ui.add([mover, node], "top-right");
+
+    });
+  </script>
+
+<body>
+  <div id="viewDiv"></div>
+</body>
+
+</html>

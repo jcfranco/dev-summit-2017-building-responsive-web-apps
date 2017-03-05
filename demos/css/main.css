@@ -1,0 +1,70 @@
+/* need higher specificity to override Calcite Web */
+.esri-expand .type-filter {
+  width: 140px;
+  background-color: white;
+}
+
+.time-filter {
+  background: #fff;
+  color: #333;
+  padding: 8px;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.time-filter__labels {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.time-filter__label {
+  font-size: 11px;
+}
+
+.time-filter__date-label {
+  display: inline-block;
+  position: relative;
+  font-weight: bolder;
+  width: 90px;
+  white-space: nowrap;
+  text-align: center;
+}
+
+.time-filter__slider {
+  margin: 0 10px;
+  padding: 0;
+  width: 200px;
+  height: 10px;
+  outline: none;
+  border-radius: 4px;
+  margin: 8px;
+  background-color: #ddd;
+}
+
+.time-filter__slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: #333;
+  cursor: pointer;
+  transition: background .15s ease-in-out;
+}
+
+.time-filter__slider::-moz-range-thumb {
+  width: 15px;
+  height: 15px;
+  border: 0;
+  border-radius: 50%;
+  background: #333;
+  cursor: pointer;
+  transition: background .15s ease-in-out;
+}
+
+.time-filter__slider::-moz-range-track {
+  background: #ddd;
+}
