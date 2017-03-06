@@ -126,12 +126,10 @@ where
 
 # View breakpoints
 
-There's also orientation
+There's also `orientation`
 
 * `esri-view-orientation-landscape`
 * `esri-view-orientation-portrait`
-
-[Demo](./demos/view-breakpoints.html)
 
 ---
 
@@ -157,6 +155,8 @@ For example, for medium-width, xsmall-height view:
 // orientation
 .esri-view-orientation-landscape
 ```
+
+[Demo](./demos/view-breakpoints.html)
 
 ---
 

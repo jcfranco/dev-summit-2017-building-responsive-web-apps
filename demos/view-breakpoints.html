@@ -4,51 +4,53 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
-  <title>View UI</title>
+  <title>View Breakpoints</title>
   <link rel="stylesheet" href="https://js.arcgis.com/4.3/esri/css/main.css">
-  <link rel="stylesheet" href="https://s3-us-west-1.amazonaws.com/patterns.esri.com/files/calcite-web/1.0.0-rc.1/css/calcite-web.min.css">
   <style>
     html,
-    body,
-    #viewDiv {
+    body {
       padding: 0;
       margin: 0;
       height: 100%;
       width: 100%;
     }
-
-    .grid-container {
-      /*height: 100%;*/
+    .esri-view {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      left: 200px;
+    }
+    .panel {
+      position: absolute;
+      width: 200px;
+      top: 0;
+      bottom: 0;
+      left: 0;
     }
 
-    .esri-view-width-less-than-medium .example,
-    .esri-view-width-medium .example {
-      width: 50%;
-    }
+    /* media query */
+    /*@media (min-width: 768px) {*/
+      /*.logo {*/
+        /*border: 4px solid cyan;*/
+      /*}*/
+    /*}*/
 
-    .esri-view-width-greater-than-medium .example {
-      width: 70%;
-    }
+    /* view breakpoints */
+    /*.esri-view-width-greater-than-small .logo {*/
+      /*border: 4px solid cyan;*/
+    /*}*/
 
-    .esri-view-width-less-than-small.esri-view-height-less-than-small .example {
-      opacity: 0;
-    }
-
-    .example {
-      box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.45);
-      transition: opacity 0.25s;
-    }
   </style>
   <script src="https://js.arcgis.com/4.3/"></script>
   <script>
     require([
       "esri/Map",
       "esri/views/MapView",
-      "esri/widgets/BasemapGallery",
       "dojo/dom-construct",
       "dojo/domReady!"
     ], function(
-      Map, MapView, BasemapGallery,
+      Map, MapView,
       domConstruct
     ) {
       var map = new Map({
@@ -62,28 +64,30 @@
         center: [-116.51327133175782, 33.82029520464912]
       });
 
-      var someNode = domConstruct.create("img", {
-        className: "example",
-        src: "../images/corner.gif"
+      var logo = domConstruct.create("img", {
+        src: "https://placeholdit.imgix.net/~text?bg=000&txtclr=e8117f&txtsize=48&txt=logo&w=100&h=80",
+        class: "logo",
+        title: "logo"
       });
 
-      view.ui.add(someNode, {
-        position: "top-right"
-      });
+      view.ui.add(logo, "bottom-right");
+
+      function updateSizes() {
+        document.getElementById("size-panel").innerHTML =
+          "View width: " + view.width + "px<br>" +
+          "Page width: " + document.body.clientWidth + "px";
+      }
+
+      updateSizes();
+
+      window.onresize = updateSizes;
+
     });
   </script>
 
 <body>
-  <header class="top-nav font-size-4">Demo: View Breakpoints</header>
-  <!--<header class="top-nav font-size-3">Esri Developer Summit 2017</header>-->
-  <div class="leader-1 grid-container">
-    <div class="column-4">
-      <div class="panel">
-        <span>Content</span>
-      </div>
-    </div>
-    <div id="viewDiv" class="column-20"></div>
-  </div>
+  <div id="size-panel" class="panel"></div>
+  <div id="viewDiv"></div>
 </body>
 
 </html>
