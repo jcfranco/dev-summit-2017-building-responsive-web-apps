@@ -13,6 +13,7 @@
       margin: 0;
       height: 100%;
       width: 100%;
+      background-color: #333;
     }
 
     #viewDiv {
@@ -35,6 +36,10 @@
 
     .example {
       box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.45);
+    }
+
+    .flipped {
+      transform: rotate(90deg);
     }
   </style>
   <script src="https://js.arcgis.com/4.3/"></script>
@@ -71,12 +76,12 @@
 
       view.watch("orientation", function(newValue, oldValue) {
         if (newValue === "landscape") {
-          someNode.src = "../images/"
+          someNode.classList.remove("flipped");
           return;
         }
 
         // portrait
-
+        someNode.classList.add("flipped");
       });
     });
   </script>

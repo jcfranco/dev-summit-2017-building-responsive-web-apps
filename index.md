@@ -55,6 +55,8 @@ Kelly Hutchins and Juan Carlos Franco
   }
 ```
 
+[Demo](./demos/feature-detection.html)
+
 ---
 
 # Themes
@@ -226,11 +228,11 @@ At 4.3:
 
 ---
 
-## POIs (Presentations Of Interest)
+## Suggested Sessions
 
-* Designing Great UX/UI with Calcite Maps
-* Customizing the ArcGIS API for JavaScript Widgets
-* Web AppBuilder for ArcGIS: Advanced Development Tools and Techniques
+* [Designing Great UX/UI with Calcite Maps](https://devsummitps17.schedule.esri.com/session-catalog/107565610)
+* [Customizing the ArcGIS API for JavaScript Widgets](https://devsummitps17.schedule.esri.com/session-catalog/937267108)
+* [ArcGIS API for JavaScript: Building Mobile Web Apps](https://devsummitps17.schedule.esri.com/session-catalog/1717886282)
 
 ---
 
@@ -240,7 +242,7 @@ At 4.3:
 * [Styling](http://developers.arcgis.com/javascript/latest/guide/styling/index.html)
 * [Calcite Web](http://esri.github.io/calcite-web/)
 * [JavaScript Sessions at DevSummit](https://devsummit.schedule.esri.com/#search/sessions/q:javascript)
-* [Documentation - 4.x](https://developers.arcgis.com/javascript/latest)
+* [Documentation - 4.3](https://developers.arcgis.com/javascript/latest)
 
 ---
 

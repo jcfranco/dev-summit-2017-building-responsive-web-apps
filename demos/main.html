@@ -44,7 +44,6 @@
       "demo/utils",
       "esri/core/watchUtils",
       "esri/Map",
-      "esri/views/MapView",
       "esri/widgets/BasemapToggle",
       "esri/widgets/Expand",
       "esri/widgets/LayerList",
@@ -54,74 +53,86 @@
       demoUtils,
       watchUtils,
       Map,
-      MapView,
       BasemapToggle, Expand, Legend, Search
     ) {
 
-      var dogeFeatureLayer = demoUtils.getDogeFeatureLayer();
+      // let's go!
+      demoUtils.get3DCapableView().then(init);
 
-      var map = new Map({
-        basemap: "gray",
-        layers: [
-          dogeFeatureLayer
-        ]
-      });
+      function init(View) {
 
-      var view = new MapView({
-        map: map,
-        container: "viewDiv",
-        zoom: 2
-      });
+        // set up map
 
-      var basemapToggle = new BasemapToggle({
-        nextBasemap: "topo",
-        view: view
-      });
+        var dogeFeatureLayer = demoUtils.getDogeFeatureLayer();
 
-      var search = new Search({
-        sources: [
-          {
-            featureLayer: dogeFeatureLayer,
-            placeholder: "find doge",
-            openPopupOnSelect: false,
-            resultSymbol: demoUtils.getDogeSymbol()
+        var map = new Map({
+          basemap: "gray",
+          layers: [
+            dogeFeatureLayer
+          ]
+        });
+
+        var view = new View({
+          map: map,
+          container: "viewDiv",
+          zoom: 2
+        });
+
+        // set up widgets
+
+        var basemapToggle = new BasemapToggle({
+          nextBasemap: "topo",
+          view: view
+        });
+
+        var search = new Search({
+          sources: [
+            {
+              featureLayer: dogeFeatureLayer,
+              placeholder: "find doge",
+              openPopupOnSelect: false,
+              resultSymbol: demoUtils.getDogeSymbol()
+            }
+          ],
+          view: view
+        });
+
+        var searchExpand = new Expand({
+          expandIconClass: "esri-icon-search",
+          content: search
+        });
+
+        var typeExpand = new Expand({
+          expandIconClass: "esri-icon-filter",
+          content: demoUtils.createTypeSelect(dogeFeatureLayer)
+        });
+
+        var timeExpand = new Expand({
+          expandIconClass: "esri-icon-time-clock",
+          content: demoUtils.createTimeSlider(dogeFeatureLayer)
+        });
+
+        // set up UI
+
+        var theExpandables = [searchExpand, typeExpand, timeExpand];
+
+        view.ui.add(theExpandables, "top-right");
+        view.ui.add(basemapToggle, "bottom-left");
+
+        watchUtils.init(view, "widthBreakpoint", function(width) {
+          var mobileSized = width === "small" || width === "xsmall";
+
+          if (mobileSized) {
+            view.ui.move(theExpandables, "bottom-right");
+            view.ui.remove(basemapToggle);
           }
-        ],
-        view: view
-      });
+          else {
+            view.ui.move(theExpandables, "top-right");
+            view.ui.add(basemapToggle, "bottom-left");
+          }
+        });
 
-      var searchExpand = new Expand({
-        expandIconClass: "esri-icon-search",
-        content: search
-      });
-
-      var typeExpand = new Expand({
-        expandIconClass: "esri-icon-filter",
-        content: demoUtils.createTypeSelect(dogeFeatureLayer)
-      });
-
-      var timeExpand = new Expand({
-        expandIconClass: "esri-icon-time-clock",
-        content: demoUtils.createTimeSlider(dogeFeatureLayer)
-      });
-
-      var theExpandables = [searchExpand, typeExpand, timeExpand];
-
-      view.ui.add(theExpandables, "top-right");
-      view.ui.add(basemapToggle, "bottom-left");
-
-      watchUtils.init(view, "widthBreakpoint", function(width) {
-        var mobileSized = width === "small" || width === "xsmall";
-
-        if (mobileSized) {
-          view.ui.move(theExpandables, "bottom-right");
-          view.ui.remove(basemapToggle);
-        }
-        else {
-          view.ui.move(theExpandables, "top-right");
-          view.ui.add(basemapToggle, "bottom-left");
-        }
-      });
+      }
 
     });
   </script>
