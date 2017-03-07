@@ -16,11 +16,13 @@ Kelly Hutchins and Juan Carlos Franco
 * Calcite Web
 
 ---
+
 # So many devices
 
 ![responsive](./images/littletobig.png)
 
 ---
+
 # Separate Apps
 
 * Multiple versions of app
@@ -39,6 +41,7 @@ Kelly Hutchins and Juan Carlos Franco
 ![flexible](./images/flexible.jpeg)
 
 ---
+
 # Feature Detection
 
 ```javascript
