@@ -129,6 +129,18 @@ where
 
 # View breakpoints
 
+* `xsmall`: 0 – 544px
+* `small`: 545 - 768px
+* `medium`: 769 - 992px
+* `large`: 993 - 1200px
+* `xlarge`: 1201+px
+
+[Customizable!](https://developers.arcgis.com/javascript/latest/api-reference/esri-views-View.html#breakpoints)
+
+---
+
+# View breakpoints
+
 There's also `orientation`
 
 * `esri-view-orientation-landscape`
