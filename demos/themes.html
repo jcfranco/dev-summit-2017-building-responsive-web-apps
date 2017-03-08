@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
   <title>Themes</title>
+  <link id="themeStylesheet" rel="stylesheet" href="https://js.arcgis.com/4.3/esri/themes/light/main.css">
   <style>
     html,
     body,
@@ -21,41 +22,36 @@
       "esri/Map",
       "esri/views/MapView",
       "esri/widgets/Search",
-      "dojo/dom-construct",
+      "dojo/dom",
       "dojo/domReady!"
     ], function(
       Map, MapView, Search,
-      domConstruct
+      dom
     ) {
-      var theme = location.search
-                    .slice("?theme=".length) || "dark";
 
-      var stylesheet = domConstruct.create("link", {
-        rel: "stylesheet",
-        href: "https://js.arcgis.com/4.3/esri/themes/" + theme + "/main.css",
-        onload: init
-      }, document.body);
+      // dynamically change theme
+      var theme = location.search.slice("?theme=".length) || "light";
+      var themeUrl = "https://js.arcgis.com/4.3/esri/themes/" + theme + "/main.css";
+      dom.byId("themeStylesheet").href = themeUrl;
 
-      function init() {
-        var map = new Map({
-          basemap: "streets-navigation-vector"
-        });
+      var map = new Map({
+        basemap: "oceans"
+      });
 
-        var view = new MapView({
-          map: map,
-          container: "viewDiv"
-        });
+      var view = new MapView({
+        map: map,
+        container: "viewDiv"
+      });
 
-        var search = new Search({
-          view: view
-        });
+      var search = new Search({
+        view: view
+      });
 
-        view.ui.add(search, "top-right");
+      view.ui.add(search, "top-right");
 
-        view.then(function() {
-          search.search("Waialea Beach Park, Honolulu")
-        });
-      };
+      view.then(function() {
+        search.search("Waialea Beach Park, Honolulu")
+      });
     });
   </script>
   <div id="viewDiv"></div>
