@@ -265,4 +265,15 @@ At 4.3:
 
 ---
 
+# Please Take Our Survey!
+
+1. Download the Esri Events app and go to DevSummit
+2. Select the session you attended
+3. Scroll down to the "Feedback" section
+4. Complete Answers, add a Comment, and Select "Submit"
+
+<img src="./images/submit-feedback.png" width="200">
+
+---
+
 <!-- .slide: data-background="reveal.js/img/end.png" -->
