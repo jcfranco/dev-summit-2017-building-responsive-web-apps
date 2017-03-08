@@ -230,6 +230,11 @@ if (view.widthBreakpoint === "large") {
 # Widgets
 
 * Mobile-friendly
+* Modern features 
+
+[Flexbox](http://caniuse.com/#feat=flexbox)
+
+[Basemap Gallery](https://developers.arcgis.com/javascript/latest/sample-code/widgets-basemapgallery/live/index.html)
 
 ---
 
