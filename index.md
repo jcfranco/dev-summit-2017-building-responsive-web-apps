@@ -92,15 +92,6 @@ Kelly Hutchins and Juan Carlos Franco
 
 ---
 
-# Separate Apps
-
-* Multiple versions of app
-* User agent detection
-
-![sniff](./images/sniff.jpg "Flickr: Ben Fruen")
-
----
-
 # Themes
 
 Cool themes, bro.
