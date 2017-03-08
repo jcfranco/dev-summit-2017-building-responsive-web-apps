@@ -17,28 +17,58 @@ Kelly Hutchins and Juan Carlos Franco
 
 ---
 
-# So many devices
+
+# Screen size
 
 ![responsive](./images/littletobig.png)
+
+---
+
+# Responsive apps
+
+* Fixed width
+
+[Demo](http://www.arcgis.com/apps/OnePane/basicviewer/index.html?webmap=6a7794164bc3428692fa771cd04c0d4b)
+
+* Responsive
+
+[Demo](https://developers.arcgis.com/javascript/latest/sample-code/index.html)
+
+---
+
+
+# Calcite Web
+
+ Responsive HTML, CSS and JS framework
+
+[demo](https://esri.github.io/calcite-web/)
+
+---
+
+# Media Queries
+  
+  * Determine screen size
+  * Apply css for that screen size
+
+```javascript
+  @media (max-width: 600px)
+  .socialArea {
+      visibility: hidden;
+  }
+
+  @media (min-width: 700px) and (orientation: landscape) { ... }
+  ```
+
+[demo](http://www.arcgis.com/apps/StoryMapBasic/index.html?webmap=6a7794164bc3428692fa771cd04c0d4b)
 
 ---
 
 # Separate Apps
 
 * Multiple versions of app
-* Browser or platform sniffing
+* User agent detection
 
 ![sniff](./images/sniff.jpg "Flickr: Ben Fruen")
-
----
-
-# Responsive Design
-
-* Fluid grids
-* Flexible elements
-* Media queries
-
-![flexible](./images/flexible.jpeg)
 
 ---
 
@@ -59,6 +89,15 @@ Kelly Hutchins and Juan Carlos Franco
 ```
 
 [Demo](./demos/feature-detection.html)
+
+---
+
+# Separate Apps
+
+* Multiple versions of app
+* User agent detection
+
+![sniff](./images/sniff.jpg "Flickr: Ben Fruen")
 
 ---
 
@@ -233,7 +272,10 @@ At 4.3:
 ---
 
 # Configuring widgets - Expand
+
 * Hide/Show a container
+
+[Demo](./demos/widget-expand.html)
 
 ---
 
@@ -262,6 +304,11 @@ At 4.3:
 ---
 
 # Questions?
+
+---
+
+# Slides and demos
+[Github](https://github.com/jcfranco/dev-summit-2017-building-responsive-web-apps.git)
 
 ---
 
